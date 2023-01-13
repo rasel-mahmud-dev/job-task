@@ -1,0 +1,23 @@
+.form{
+  max-width: 300px;
+  padding: 40px;
+  margin: auto;
+  border: 1px solid rgba(115, 115, 115, 0.13);
+  img{
+    width: 100%;
+  }
+
+  &-para{
+    text-align: center;
+  }
+
+  &-tab-root{
+    display: flex;
+    justify-content: space-between;
+
+  }
+
+  &-tab-content{
+    padding: 20px;
+  }
+}

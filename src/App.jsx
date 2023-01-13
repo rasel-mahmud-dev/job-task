@@ -1,13 +1,14 @@
 import { useState } from 'react'
-import './App.css'
-import Login from "./pages/Login/Login";
+import './App.scss'
+
+import JoinForm from "./pages/JoinForm/JoinForm";
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <div className="App">
-        <Login />
+        <JoinForm />
     </div>
   )
 }
