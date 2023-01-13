@@ -6,11 +6,17 @@
   padding: 8px 15px;
 }
 
-.btn-solid{}
+.btn-solid{
+  font-weight: 600;
+  background: var(--primary);
+  border-radius: 30px;
+  padding: 15px 0;
+  color: var(--stone-100);
+}
 .btn-text{
   border-bottom: 2px solid transparent;
 }
 .active-tab-btn{
-  border-bottom: 2px solid var(--primary);
-  font-weight: bold;
+  border-bottom: 3px solid var(--primary);
+  font-weight: 600;
 }

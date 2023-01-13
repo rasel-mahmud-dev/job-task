@@ -1,0 +1,25 @@
+
+.text-input {
+    background: transparent;
+    padding: 15px 20px;
+    border: 1.5px solid var(--stone-700);
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 30px;
+    transition: border .3s ease;
+    font-family: inherit;
+    color: var(--stone-500);
+    font-size: 15px;
+
+    &:focus {
+        border-color: var(--primary)
+    }
+
+
+    &::placeholder {
+        font-family: inherit;
+        color: currentColor;
+    }
+
+}

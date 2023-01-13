@@ -1,10 +1,11 @@
 import React from 'react';
 
-const Input = () => {
+import "./input.scss";
+
+
+const Input = ({...otherAttr}) => {
     return (
-        <div>
-            
-        </div>
+        <input className="text-input" {...otherAttr} />
     );
 };
 

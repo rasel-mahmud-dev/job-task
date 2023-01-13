@@ -1,23 +1,52 @@
-.form{
-  max-width: 300px;
-  padding: 40px;
-  margin: auto;
-  border: 1px solid rgba(115, 115, 115, 0.13);
-  img{
-    width: 100%;
-  }
+.form {
+    max-width: 430px;
+    padding: 40px;
+    margin: 10px auto;
+    border: 1px solid rgba(115, 115, 115, 0.13);
+    border-radius: 20px;
 
-  &-para{
-    text-align: center;
-  }
+    &-image {
+        max-width: 180px;
+        margin: auto;
 
-  &-tab-root{
+        img {
+            width: 100%;
+        }
+    }
+
+    &-para {
+        text-align: center;
+        color: var(--stone-900);
+        margin-bottom: 30px;
+    }
+
+    &-tab-root {
+        display: flex;
+        justify-content: space-between;
+
+    }
+
+    &-tab-content {
+        padding: 10px 60px;
+    }
+}
+
+
+.input-box {
+    margin-top: 40px;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    row-gap: 20px;
 
-  }
+    .forgot-password-link {
+        font-size: 14px;
+        font-weight: 500;
+    }
 
-  &-tab-content{
-    padding: 20px;
-  }
+    .para-link {
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--stone-700);
+    }
+
 }
