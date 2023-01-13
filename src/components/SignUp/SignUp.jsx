@@ -4,33 +4,56 @@ import Button from "../Button/Button";
 import Input from "../Input/Input";
 import FormFooter from "../FormFooter/FormFooter";
 
-const SignUp = ({ onChange, onSwitchTab }) => {
+export const signUpInputFields = {
+    firstName: {
+        name: "firstName",
+        type: "text",
+        placeholder: "First Name",
+        validateData: {
+            required: "First Name Required",
+        },
+    },
+    lastName: {
+        name: "lastName",
+        type: "text",
+        placeholder: "Last Name",
+        validateData: {
+            required: "Last Name Required",
+        },
+    },
+    email: {
+        name: "email",
+        type: "email",
+        placeholder: "Enter email",
+        validateData: {
+            required: "Email Required",
+        },
+    },
+
+    password: {
+        type: "password",
+        name: "password",
+        placeholder: "Enter password",
+        validateData: {
+            required: "Password required",
+            minLength: { value: 6, message: "Password should be min 6 character" },
+        }
+    },
+};
+
+const SignUp = ({ onChange, errors, onSwitchTab }) => {
     return (
         <div className="input-box">
-            <Input
-                name="firstName"
-                type="text"
-                placeholder="First Name"
-                onChange={onChange}
-            />
-            <Input
-                name="lastName"
-                type="text"
-                placeholder="Last Name"
-                onChange={onChange}
-            />
-            <Input
-                name="email"
-                type="email"
-                placeholder="Email Address"
-                onChange={onChange}
-            />
-            <Input
-                name="password"
-                type="password"
-                placeholder="Password"
-                onChange={onChange}
-            />
+
+            {/**** render dynamically input fields *****/}
+            {Object.keys(signUpInputFields).map(inputKey=>(
+                <Input
+                    key={inputKey}
+                    {...signUpInputFields[inputKey] }
+                    error={errors[inputKey]}
+                    onChange={(e)=>onChange(e, signUpInputFields[inputKey].validateData)}
+                />
+            ))}
 
             <Button>Sign Up</Button>
 

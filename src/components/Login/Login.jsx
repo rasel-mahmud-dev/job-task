@@ -4,37 +4,44 @@ import "./login.scss";
 import Button from "../Button/Button";
 import Input from "../Input/Input";
 import FormFooter from "../FormFooter/FormFooter";
+import {signUpInputFields} from "../SignUp/SignUp";
+
+export const loginInputFields = {
+    email: {
+        name: "email",
+        type: "email",
+        placeholder: "Enter email",
+        validateData: {
+            required: "Email Required",
+        },
+    },
+
+    password: {
+        type: "password",
+        name: "password",
+        placeholder: "Enter password",
+        validateData: {
+            required: "Password required",
+            minLength: { value: 6, message: "Password should be min 6 character" },
+        }
+    },
+};
 
 
 const Login = ({ onChange, onSwitchTab, errors }) => {
 
-    const inputFields = {
-        email: {
-            name: "email",
-            type: "email",
-            placeholder: "Enter email",
-            validate: {
-                required: "Email Required",
-            },
-        },
-
-        password: {
-            type: "password",
-            name: "password",
-            placeholder: "Enter password",
-            validate: {
-                required: "Password required",
-                minLength: { value: 6, message: "Password should be min 6 character" },
-            }
-        },
-    };
 
     return (
         <div className="input-box">
 
-
-            {Object.keys(inputFields).map(inputKey=>(
-                <Input {...inputFields[inputKey] } error={errors[inputKey]} onChange={onChange} />
+            {/**** render dynamically input fields *****/}
+            {Object.keys(loginInputFields).map(inputKey=>(
+                <Input
+                    key={inputKey}
+                    {...loginInputFields[inputKey] }
+                    error={errors[inputKey]}
+                    onChange={(e)=>onChange(e, loginInputFields[inputKey].validateData)}
+                />
             ))}
 
 
