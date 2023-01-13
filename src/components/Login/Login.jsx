@@ -6,11 +6,37 @@ import Input from "../Input/Input";
 import FormFooter from "../FormFooter/FormFooter";
 
 
-const Login = ({ onChange, onSwitchTab }) => {
+const Login = ({ onChange, onSwitchTab, errors }) => {
+
+    const inputFields = {
+        email: {
+            name: "email",
+            type: "email",
+            placeholder: "Enter email",
+            validate: {
+                required: "Email Required",
+            },
+        },
+
+        password: {
+            type: "password",
+            name: "password",
+            placeholder: "Enter password",
+            validate: {
+                required: "Password required",
+                minLength: { value: 6, message: "Password should be min 6 character" },
+            }
+        },
+    };
+
     return (
         <div className="input-box">
-            <Input name="email" onChange={onChange} type="email" placeholder="Email Address"/>
-            <Input name="password" onChange={onChange} type="password" placeholder="Password" />
+
+
+            {Object.keys(inputFields).map(inputKey=>(
+                <Input {...inputFields[inputKey] } error={errors[inputKey]} onChange={onChange} />
+            ))}
+
 
             <Button>LOGIN</Button>
 

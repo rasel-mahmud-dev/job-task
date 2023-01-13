@@ -6,8 +6,15 @@ import Button from "../../components/Button/Button";
 import Login from "../../components/Login/Login";
 import SignUp from "../../components/SignUp/SignUp";
 
+
+
 const JoinForm = () => {
     const [tab, setTab] = useState(1);
+
+    const [errors, setErrors] = useState({
+        email: "Please provide valid email"
+    });
+
 
     function handleSwitchTab(tabNo) {
         setTab(tabNo);
@@ -75,6 +82,7 @@ const JoinForm = () => {
             <div className="form-tab-content">
                 {tab === 1 ? (
                     <Login
+                        errors={errors}
                         onSwitchTab={handleSwitchTab}
                         onChange={handleChange}
                     />
