@@ -26,6 +26,7 @@ export const signUpInputFields = {
         type: "email",
         placeholder: "Enter email",
         validateData: {
+            regex: {value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, message: "Please provide valid email"},
             required: "Email Required",
         },
     },

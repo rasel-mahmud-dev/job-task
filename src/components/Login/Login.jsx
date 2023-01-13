@@ -4,7 +4,7 @@ import "./login.scss";
 import Button from "../Button/Button";
 import Input from "../Input/Input";
 import FormFooter from "../FormFooter/FormFooter";
-import {signUpInputFields} from "../SignUp/SignUp";
+
 
 export const loginInputFields = {
     email: {
@@ -12,6 +12,7 @@ export const loginInputFields = {
         type: "email",
         placeholder: "Enter email",
         validateData: {
+            regex: {value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, message: "Please provide valid email"},
             required: "Email Required",
         },
     },

@@ -48,5 +48,20 @@
         font-weight: 500;
         color: var(--stone-700);
     }
+}
 
+.toast-success-user-modal{
+    padding: 40px;
+    max-width: 400px;
+    box-shadow: 0 0 2px 4px red;
+    background: white;
+    transition: transform .4s ease, opacity .2s ease ;
+}
+.user-login-success{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    img{
+        width: 100px;
+    }
 }

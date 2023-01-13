@@ -2,17 +2,22 @@ import React, {useEffect, useState} from "react";
 
 import "./joinForm.scss";
 
-import Button from "../../components/Button/Button";
-import Login, {loginInputFields} from "../../components/Login/Login";
-import SignUp, {signUpInputFields} from "../../components/SignUp/SignUp";
-import validator from "../../utils/Validator";
+import Button from "components/Button/Button";
+import Login, {loginInputFields} from "components/Login/Login";
+import SignUp, {signUpInputFields} from "components/SignUp/SignUp";
+import validator from "src/utils/Validator";
+import useToast from "src/hooks/useToast";
 
 
 
 
 const JoinForm = () => {
+
+    const toast = useToast()
+
     const [tab, setTab] = useState(1);
 
+    // input error state
     const [errors, setErrors] = useState({
         firstName: "",
         lastName: "",
@@ -21,10 +26,13 @@ const JoinForm = () => {
     });
 
 
+
+    // tab switcher handler
     function handleSwitchTab(tabNo) {
         setTab(tabNo);
     }
 
+    // user input state
     const [userInput, setUserInput] = useState({
         firstName: "",
         lastName: "",
@@ -33,6 +41,7 @@ const JoinForm = () => {
     });
 
 
+    // user input change  handler
     function handleChange(e, validateData) {
         const { name, value } = e.target;
         setUserInput((prevState) => ({
@@ -55,6 +64,8 @@ const JoinForm = () => {
         });
     }
 
+
+    // form submit handler
     function handleSubmit(evt) {
         // prevent page load when submit form
         evt.preventDefault();
@@ -86,8 +97,9 @@ const JoinForm = () => {
 
         // update error state
         setErrors(updateErrorMessage)
-    }
 
+        toast.open(renderSuccessJSX())
+    }
 
 
      // Reset Error Message when tab change
@@ -103,12 +115,19 @@ const JoinForm = () => {
        resetErrorMessageTabChange()
     }, [tab])
 
-
-
+    function renderSuccessJSX(){
+        return (
+            <div className="user-login-success" >
+                <h2>Your Done!</h2>
+                <img  src="/icons/check-mark.png"/>
+            </div>
+        )
+    }
 
 
     return (
         <form className="form" onSubmit={handleSubmit} >
+
             <div className="form-image">
                 <img src="/images/React-icon.svg.png" alt="login-image" />
             </div>

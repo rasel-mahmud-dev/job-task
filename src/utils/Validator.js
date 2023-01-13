@@ -33,6 +33,14 @@ function validator(validate, value){
     if ("max" in validate) {
         if (value && value > validate.max.value) return validate["max"].message;
     }
+
+    if("regex" in validate){
+        if(value){
+            return validate["regex"].value.test(value) ? "" : validate["regex"].message
+        } else {
+           return  validate["regex"].message
+        }
+    }
     return  ""
 }
 

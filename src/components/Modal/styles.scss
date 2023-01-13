@@ -1,0 +1,24 @@
+
+.modal{
+    width: 100%;
+    position: fixed;
+    left: 50%;
+    top: 10%;
+    box-shadow: 0 0 20px 0px #36363633;
+    background: white;
+    border-radius: 20px;
+    transition: transform .4s ease, opacity .2s ease ;
+    opacity: 0;
+    transform-origin: center;
+    transform: scale(0) translateX(-50%);
+
+    &.open-modal{
+        opacity: 1;
+        transform: scale(1) translateX(-50%);
+    }
+    &.close-modal{
+        transform: scale(0) translateX(-50%);
+        opacity: 0;
+    }
+
+}
