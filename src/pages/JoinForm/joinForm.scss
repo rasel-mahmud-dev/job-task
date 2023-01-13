@@ -1,9 +1,14 @@
+@import "src/sass/--mixins.scss";
+
 .form {
     max-width: 430px;
     padding: 40px;
     margin: 10px auto;
     border: 1px solid rgba(115, 115, 115, 0.13);
     border-radius: 20px;
+    @include getDown(450px){
+        padding: 20px;
+    }
 
     &-image {
         max-width: 180px;
@@ -28,6 +33,9 @@
 
     &-tab-content {
         padding: 10px 60px;
+        @include getDown(450px){
+            padding: 10px 10px;
+        }
     }
 }
 
@@ -53,9 +61,11 @@
 .toast-success-user-modal{
     padding: 40px;
     max-width: 400px;
-    box-shadow: 0 0 2px 4px red;
-    background: white;
-    transition: transform .4s ease, opacity .2s ease ;
+    box-sizing: border-box;
+    @include getDown(410px){
+        padding: 30px;
+        max-width: 90%
+    }
 }
 .user-login-success{
     display: flex;

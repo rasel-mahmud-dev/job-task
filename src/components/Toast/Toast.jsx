@@ -14,9 +14,7 @@ const Toast = (props) => {
             onClose={() => close()}
             className={`toast-success-user-modal`}
         >
-            <div>
-                {data}
-            </div>
+            <div>{data}</div>
         </Modal>
     );
 };

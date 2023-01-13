@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import "./login.scss";
 import Button from "../Button/Button";
@@ -12,8 +12,8 @@ export const loginInputFields = {
         type: "email",
         placeholder: "Enter email",
         validateData: {
-            regex: {value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, message: "Please provide valid email"},
             required: "Email Required",
+            regex: {value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, message: "Please provide valid email"},
         },
     },
 
@@ -29,7 +29,7 @@ export const loginInputFields = {
 };
 
 
-const Login = ({ onChange, onSwitchTab, errors }) => {
+const Login = ({ onChange, onOpenResetPasswordModal, onSwitchTab, errors }) => {
 
 
     return (
@@ -48,7 +48,7 @@ const Login = ({ onChange, onSwitchTab, errors }) => {
 
             <Button>LOGIN</Button>
 
-            <FormFooter  resetPasswordLink="#">
+            <FormFooter isHasPasswordReset={true} onOpenResetPasswordModal={onOpenResetPasswordModal}>
                 <p className="para-link text-center mt-20">
                     Don't have an account?
                     <a className="link" onClick={()=>onSwitchTab(2)}>

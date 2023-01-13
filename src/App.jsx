@@ -1,14 +1,16 @@
-import { useState } from 'react'
+import {lazy,  Suspense} from 'react'
 import './App.scss'
+import Loader from "components/Loader/Loader";
 
-import JoinForm from "./pages/JoinForm/JoinForm";
+const JoinForm = lazy(()=>import("./pages/JoinForm/JoinForm"));
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <div className="App">
-        <JoinForm />
+        <Suspense fallback={<Loader />}>
+            <JoinForm />
+        </Suspense>
     </div>
   )
 }

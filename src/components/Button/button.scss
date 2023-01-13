@@ -1,22 +1,25 @@
-.btn{
-  outline: none;
-  border: none;
-  background: transparent;
-  font-size: inherit;
-  padding: 8px 15px;
+.btn {
+    outline: none;
+    border: none;
+    background: transparent;
+    font-size: inherit;
+    padding: 8px 15px;
 }
 
-.btn-solid{
-  font-weight: 600;
-  background: var(--primary);
-  border-radius: 30px;
-  padding: 15px 0;
-  color: var(--stone-100);
+.btn-solid {
+    font-weight: 500;
+    background: var(--primary);
+    border-radius: 30px;
+    padding: 15px;
+    color: var(--stone-100);
+    cursor: pointer;
 }
-.btn-text{
-  border-bottom: 2px solid transparent;
+
+.btn-text {
+    border-bottom: 2px solid transparent;
 }
-.active-tab-btn{
-  border-bottom: 3px solid var(--primary);
-  font-weight: 600;
+
+.active-tab-btn {
+    border-bottom: 3px solid var(--primary);
+    font-weight: 600;
 }

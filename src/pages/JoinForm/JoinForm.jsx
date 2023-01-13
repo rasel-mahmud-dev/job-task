@@ -1,19 +1,16 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 
 import "./joinForm.scss";
 
 import Button from "components/Button/Button";
-import Login, {loginInputFields} from "components/Login/Login";
-import SignUp, {signUpInputFields} from "components/SignUp/SignUp";
+import Login, { loginInputFields } from "components/Login/Login";
+import SignUp, { signUpInputFields } from "components/SignUp/SignUp";
 import validator from "src/utils/Validator";
 import useToast from "src/hooks/useToast";
-
-
-
+import ForgetPassword from "components/ForgetPassword/ForgetPassword";
 
 const JoinForm = () => {
-
-    const toast = useToast()
+    const toast = useToast();
 
     const [tab, setTab] = useState(1);
 
@@ -25,7 +22,9 @@ const JoinForm = () => {
         password: "",
     });
 
-
+    // open forget password modal state
+    const [isOpenForgotPasswordModal, setOpenForgotPasswordModal] =
+        useState(false);
 
     // tab switcher handler
     function handleSwitchTab(tabNo) {
@@ -40,7 +39,6 @@ const JoinForm = () => {
         password: "",
     });
 
-
     // user input change  handler
     function handleChange(e, validateData) {
         const { name, value } = e.target;
@@ -49,94 +47,117 @@ const JoinForm = () => {
             [name]: value.trim(),
         }));
 
+        // if not pass validateData then skip checking validation
+        if (!validateData) return;
 
         // validateData will pass from login and register component
-        let errorMsg = validator(validateData, value)
+        let errorMsg = validator(validateData, value);
         setErrors((prevState) => {
-
-            let updateErrorMessage  = {...prevState}
-            if(errorMsg){
-                updateErrorMessage[name] = errorMsg
+            let updateErrorMessage = { ...prevState };
+            if (errorMsg) {
+                updateErrorMessage[name] = errorMsg;
             } else {
-                updateErrorMessage[name] = ""
+                updateErrorMessage[name] = "";
             }
-            return updateErrorMessage
+            return updateErrorMessage;
         });
     }
-
 
     // form submit handler
     function handleSubmit(evt) {
         // prevent page load when submit form
         evt.preventDefault();
 
-        let updateErrorMessage = {...errors}
+        let updateErrorMessage = { ...errors };
+        let isFormCompleted = true;
         if (tab === 1) {
             // handle user login
 
             for (let inputName in loginInputFields) {
-                let validateData  = loginInputFields[inputName]?.validateData
-                if(validateData) {
-                    let errorMsg = validator(validateData, userInput[inputName])
-                    updateErrorMessage[inputName] = errorMsg
+                let validateData = loginInputFields[inputName]?.validateData;
+                if (validateData) {
+                    let errorMsg = validator(
+                        validateData,
+                        userInput[inputName]
+                    );
+                    updateErrorMessage[inputName] = errorMsg;
+                    if (errorMsg) isFormCompleted = false;
                 }
             }
-
-
         } else {
             // handle user registration
             for (let inputName in signUpInputFields) {
-                let validateData  = signUpInputFields[inputName]?.validateData
-                if(validateData) {
-                    let errorMsg = validator(validateData, userInput[inputName])
-                    updateErrorMessage[inputName] = errorMsg
+                let validateData = signUpInputFields[inputName]?.validateData;
+                if (validateData) {
+                    let errorMsg = validator(
+                        validateData,
+                        userInput[inputName]
+                    );
+                    updateErrorMessage[inputName] = errorMsg;
+                    if (errorMsg) isFormCompleted = false;
                 }
             }
         }
 
-
         // update error state
-        setErrors(updateErrorMessage)
+        setErrors(updateErrorMessage);
 
-        toast.open(renderSuccessJSX())
+        // only shop success popup if all data are valid
+        if (isFormCompleted) {
+            return toast.open(renderSuccessJSX());
+        }
+
+        // now time to connect with server ...........
     }
 
-
-     // Reset Error Message when tab change
-    function resetErrorMessageTabChange(){
-        setErrors({
+    // Reset Error Message when tab change
+    function resetErrorMessageTabChange() {
+        let newState = {
             firstName: "",
             lastName: "",
             email: "",
             password: "",
-        })
+        };
+        setErrors(newState);
+        setUserInput(newState);
     }
-    useEffect(()=>{
-       resetErrorMessageTabChange()
-    }, [tab])
 
-    function renderSuccessJSX(){
+    useEffect(() => {
+        resetErrorMessageTabChange();
+    }, [tab]);
+
+    function renderSuccessJSX() {
         return (
-            <div className="user-login-success" >
+            <div className="user-login-success">
                 <h2>Your Done!</h2>
-                <img  src="/icons/check-mark.png"/>
+                <img src="/icons/check-mark.png" />
             </div>
-        )
+        );
     }
 
+    // open modal for forgot password component
+    function openForgetPasswordHandler(isOpen = false) {
+        setOpenForgotPasswordModal(isOpen);
+    }
 
     return (
-        <form className="form" onSubmit={handleSubmit} >
+        <form className="form" onSubmit={handleSubmit}>
+            <ForgetPassword
+                onClose={() => openForgetPasswordHandler()}
+                isOpen={isOpenForgotPasswordModal}
+                errors={errors}
+                onChange={handleChange}
+                email={userInput.email}
+            />
 
             <div className="form-image">
                 <img src="/images/React-icon.svg.png" alt="login-image" />
             </div>
 
             <p className="form-para mt-20">
-                { tab === 1
+                {tab === 1
                     ? "Welcome back, Please login to your account."
-                    : "To join us please create a account. We will try out best service to you"
-                }
+                    : "To join us please create a account. We will try out best service to you"}
             </p>
 
             <div className="form-tab-root">
@@ -162,6 +183,9 @@ const JoinForm = () => {
             <div className="form-tab-content">
                 {tab === 1 ? (
                     <Login
+                        onOpenResetPasswordModal={() =>
+                            openForgetPasswordHandler(true)
+                        }
                         errors={errors}
                         onSwitchTab={handleSwitchTab}
                         onChange={handleChange}

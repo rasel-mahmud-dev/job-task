@@ -2,13 +2,12 @@ import React from "react";
 import SocialLogin from "../SocialLogin/SocialLogin";
 
 const FormFooter = (props) => {
-    const { resetPasswordLink } = props;
+    const { isHasPasswordReset , onOpenResetPasswordModal} = props;
 
     return (
         <div>
-            {resetPasswordLink && (
-                <a
-                    href={resetPasswordLink}
+            {isHasPasswordReset && (
+                <a onClick={onOpenResetPasswordModal}
                     className="forgot-password-link link text-end block"
                 >
                     Forgot Password?

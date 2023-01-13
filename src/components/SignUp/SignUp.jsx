@@ -26,8 +26,8 @@ export const signUpInputFields = {
         type: "email",
         placeholder: "Enter email",
         validateData: {
-            regex: {value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, message: "Please provide valid email"},
             required: "Email Required",
+            regex: {value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, message: "Please provide valid email"},
         },
     },
 
@@ -58,7 +58,7 @@ const SignUp = ({ onChange, errors, onSwitchTab }) => {
 
             <Button>Sign Up</Button>
 
-            <FormFooter>
+            <FormFooter >
                 <p className="para-link text-center mt-20">
                     Already have an account?
                     <a className="link" onClick={()=>onSwitchTab(1)}>
